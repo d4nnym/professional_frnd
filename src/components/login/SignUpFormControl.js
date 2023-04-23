@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { postSignUp } from "@/services/profile.js";
-
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -12,33 +11,32 @@ import style from "./Login.module.css";
 import Link from "next/link";
 
 export default function SignUpFormControl() {
-
   const router = useRouter();
+
   const [signUpFormData, setSignUpFormData] = useState({
     email: "",
     password: "",
-    name:"",
-    lastname:"",
-    birthday:"",
-    profile: "user"+ Math.floor(Math.random() * 1000000)
+    name: "",
+    lastname: "",
+    birthday: "",
+    profile: "user" + Math.floor(Math.random() * 1000000),
   });
 
   const handleChange = (e) => {
-    setSignUpFormData({
-      ...signUpFormData,
-      [e.target.name]: e.target.value,
-    });
-
+    setSignUpFormData({ ...signUpFormData, [e.target.name]: e.target.value });
+    console.log(signUpFormData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(signUpFormData.birthday)
+    //console.log(signUpFormData.birthday);
     const postData = await postSignUp(signUpFormData);
 
-    console.log(signUpFormData)
-    console.log(postData)
-  }
+
+    console.log(signUpFormData);
+    console.log(postData);
+    router.push("/signin");
+  };
 
   return (
     <div
@@ -79,11 +77,12 @@ export default function SignUpFormControl() {
                 type="password"
                 name="confirmPassword"
                 placeholder="password"
-                
                 id="confirmPassword floatingInput"
                 required
               />
-              <Form.Label htmlFor="floatingInput">Confirmar Contraseña</Form.Label>
+              <Form.Label htmlFor="floatingInput">
+                Confirmar Contraseña
+              </Form.Label>
             </Form.Group>
             <Row className="mb-3">
               <Col>
@@ -124,7 +123,9 @@ export default function SignUpFormControl() {
                     id="date floatingInput"
                     required
                   />
-                  <Form.Label htmlFor="floatingInput">Fecha nacimiento</Form.Label>
+                  <Form.Label htmlFor="floatingInput">
+                    Fecha nacimiento
+                  </Form.Label>
                 </Form.Group>
               </Col>
               {/*<Col>

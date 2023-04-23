@@ -42,7 +42,7 @@ export default function SignInFormControl() {
     e.preventDefault();
     const postData = await postSignIn(signInFormData);
 
-    console.log(postData);
+    
 
     if (!postData.success) {
       handleShow();
